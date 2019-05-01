@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Hello from './components/Hello';
+import { Login, Register, Messages } from './pages';
 
 const App = () => {
   return (
     <Router>
-      <Route path="/" exact component={Hello} />
+      <Route path="/" exact component={Messages} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/register" exact component={Register} />
     </Router>
   );
 };
