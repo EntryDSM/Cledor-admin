@@ -1,3 +1,9 @@
 import styled from 'styled-components';
 
-export const Component = styled.div``;
+interface ComponentProps {
+  fontSize: string;
+}
+
+export const Component = styled.div`
+  font-size: ${({ fontSize }: ComponentProps) => fontSize};
+`;
