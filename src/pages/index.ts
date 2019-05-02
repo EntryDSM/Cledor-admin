@@ -1,5 +1,4 @@
-import Login from './Login';
-import Register from './Register';
+import Account from './Account';
 import Messages from './Messages';
 
-export { Login, Register, Messages };
+export { Account, Messages };
