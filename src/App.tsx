@@ -5,8 +5,8 @@ import { Account, Messages } from './pages';
 const App = () => {
   return (
     <Router>
-      <Route path="/account" exact component={Account} />
       <Route path="/" exact component={Messages} />
+      <Route path="/account" component={Account} />
     </Router>
   );
 };
