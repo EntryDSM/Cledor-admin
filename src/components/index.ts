@@ -1,3 +1,4 @@
 import HeaderNavigationBar from './HeaderNavigationBar';
+import MessageThreadContainer from './MessageThreadContainer';
 
-export { HeaderNavigationBar };
+export { HeaderNavigationBar, MessageThreadContainer };
