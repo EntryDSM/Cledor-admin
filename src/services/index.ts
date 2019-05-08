@@ -1,3 +1,4 @@
 import { formatDate } from './formatDate';
+import { padNumberByZero } from './padNumberByZero';
 
-export { formatDate };
+export { formatDate, padNumberByZero };
