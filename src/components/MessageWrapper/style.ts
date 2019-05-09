@@ -4,7 +4,7 @@ import { Theme } from '../../globalStyle';
 export const MessageCover = styled.div`
   display: flex;
   margin-bottom: 10px;
-  align-items: flex-start;
+  align-items: flex-end;
 `;
 
 export const StyledImage = styled.img`
@@ -15,21 +15,20 @@ export const MessageBubble = styled.div`
   max-width: 250px;
   padding: 10px;
   background-color: #ddd;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 `;
 
 export const TextLine = styled.p`
+  line-height: 20px;
   margin: 0;
 `;
 
 export const MessageTime = styled.div`
   font-size: 10px;
   color: #aaa;
-  padding: 5px;
-  box-sizing: border-box;
-  display: inline-block;
+  padding: 0 5px;
 `;
 
 interface ComponentProps {
@@ -47,7 +46,7 @@ export const Component = styled.div`
       ${MessageBubble} {
         background-color: ${Theme.MAIN_COLOR5};
         color: #fff;
-        border-top-left-radius: 10px;
+        border-top-left-radius: 20px;
         border-top-right-radius: 0;
       }
     `}
