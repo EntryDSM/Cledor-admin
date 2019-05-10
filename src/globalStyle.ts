@@ -1,10 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
+
   body {
     margin: 0;
+    font-family: 'NanumSquareRound', sans-serif;
   }
-  div, input, button {
+  div, input, button, form, a {
     box-sizing: border-box;
   }
   input, button {

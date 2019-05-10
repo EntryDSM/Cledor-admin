@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Component } from './style';
-import { InputType, inputTagType } from '../../service/convertToInputTagType';
-import { validateEmail } from '../../service/validateEmail';
+import { InputType, inputTagType, validateEmail } from '../../services';
 
 export interface TextInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

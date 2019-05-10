@@ -23,12 +23,15 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "styled-components": "^4.2.0"
+    "react-textarea-autosize": "^7.1.0",
+    "styled-components": "^4.2.0",
+    "ts-keycode-enum": "^1.0.6"
   },
   "devDependencies": {
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.2",
+    "@types/react-textarea-autosize": "^4.3.4",
     "@types/styled-components": "4.1.8",
     "awesome-typescript-loader": "^5.2.1",
     "html-loader": "^0.5.5",
@@ -37,6 +40,7 @@
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.4.4",
+    "url-loader": "^1.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
