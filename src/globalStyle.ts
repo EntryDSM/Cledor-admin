@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: 'NanumSquareRound', sans-serif;
   }
-  div, input, button {
+  div, input, button, form, a {
     box-sizing: border-box;
   }
   input, button {
