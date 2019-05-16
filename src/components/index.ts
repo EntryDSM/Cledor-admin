@@ -5,6 +5,11 @@ import HeaderNavigationBar from './HeaderNavigationBar';
 import MessageThreadContainer from './MessageThreadContainer';
 import MessageWrapper from './MessageWrapper';
 import MessengerChatBar from './MessengerChatBar';
+import AccountFormContainer from './AccountFormContainer';
+import RegisterFormContainer from './RegisterFormContainer';
+import AccountForm from './AccountForm';
+import ToggleLink from './ToggleLink';
+import LoginFormContainer from './LoginFormContainer';
 
 export {
   AccountHeading,
@@ -14,4 +19,9 @@ export {
   MessageThreadContainer,
   MessageWrapper,
   MessengerChatBar,
+  AccountFormContainer,
+  RegisterFormContainer,
+  AccountForm,
+  ToggleLink,
+  LoginFormContainer,
 };
