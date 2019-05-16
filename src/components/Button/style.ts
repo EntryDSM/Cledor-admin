@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Theme } from '../../globalStyle';
 
 export const Component = styled.button`
+  margin-top: 40px;
   display: block;
   width: 100%;
   height: 65px;
