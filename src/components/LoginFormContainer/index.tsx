@@ -13,10 +13,10 @@ interface LoginFormContainerProps {
   registerPath: string;
 }
 
-const LoginFormContainer = ({
+const LoginFormContainer: React.FunctionComponent<LoginFormContainerProps> = ({
   onSubmit,
   registerPath,
-}: LoginFormContainerProps) => {
+}) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
