@@ -1,4 +1,4 @@
-import Heading from './Heading';
+import AccountHeading from './AccountHeading';
 import TextInput from './TextInput';
 import Button from './Button';
 import HeaderNavigationBar from './HeaderNavigationBar';
@@ -7,7 +7,7 @@ import MessageWrapper from './MessageWrapper';
 import MessengerChatBar from './MessengerChatBar';
 
 export {
-  Heading,
+  AccountHeading,
   TextInput,
   Button,
   HeaderNavigationBar,
