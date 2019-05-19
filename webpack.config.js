@@ -47,6 +47,9 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true
+  },
+  output: {
+    publicPath: "/"
   }
 
   // When importing a module whose path matches one of the following, just
