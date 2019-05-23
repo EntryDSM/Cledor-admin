@@ -1,13 +1,6 @@
-import { formatDate } from './formatDate';
-import { padNumberByZero } from './padNumberByZero';
-import { InputType, inputTagType } from './convertToInputTagType';
-import { emailRegExp, validateEmail } from './validateEmail';
-
-export {
-  formatDate,
-  padNumberByZero,
-  InputType,
-  inputTagType,
-  emailRegExp,
-  validateEmail,
-};
+export * from './formatDate';
+export * from './padNumberByZero';
+export * from './convertToInputTagType';
+export * from './validateEmail';
+export * from './registerUser';
+export * from './getUserToken';
