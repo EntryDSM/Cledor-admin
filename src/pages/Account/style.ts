@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
-export const Page = styled.div``;
-export const GreetingSection = styled.div``;
-export const GreetingContainer = styled.div``;
-export const GreetingContent = styled.div``;
-export const AccountSection = styled.div``;
-export const AccountContainer = styled.div``;
-export const InputBox = styled.div``;
+export const Page = styled.div`
+  height: 100vh;
+  display: flex;
+`;
+
+export const AccountSection = styled.div`
+  height: 100%;
+  width: 700px;
+  display: table;
+`;
+
+export const AccountWrapper = styled.div`
+  display: table-cell;
+  vertical-align: middle;
+`;

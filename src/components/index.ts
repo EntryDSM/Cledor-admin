@@ -10,6 +10,7 @@ import RegisterFormContainer from './RegisterFormContainer';
 import AccountForm from './AccountForm';
 import ToggleLink from './ToggleLink';
 import LoginFormContainer from './LoginFormContainer';
+import GreetingSection from './GreetingSection';
 
 export {
   AccountHeading,
@@ -24,4 +25,5 @@ export {
   AccountForm,
   ToggleLink,
   LoginFormContainer,
+  GreetingSection,
 };
