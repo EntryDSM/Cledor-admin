@@ -1,33 +1,65 @@
 import * as React from 'react';
+import { Route, RouteComponentProps } from 'react-router';
+import { Page, AccountSection, AccountWrapper } from './style';
 import {
-  Page,
+  RegisterFormContainer,
+  LoginFormContainer,
   GreetingSection,
-  GreetingContainer,
-  GreetingContent,
-  AccountSection,
-  AccountContainer,
-} from './style';
-import { Heading, TextInput, Button } from '../../components';
+} from '../../components';
 
-const Account: React.FunctionComponent = () => {
-  return (
-    <Page>
-      <GreetingSection>
-        <GreetingContainer>
-          <Heading>Welcome!</Heading>
-          <GreetingContent />
-        </GreetingContainer>
-      </GreetingSection>
-      <AccountSection>
-        <AccountContainer>
-          <Heading>Register</Heading>
-          <TextInput />
-          <TextInput />
-          <Button />
-        </AccountContainer>
-      </AccountSection>
-    </Page>
-  );
-};
+export interface AccountProps extends RouteComponentProps {}
 
-export default Account;
+export default class Account extends React.Component<AccountProps> {
+  constructor(props: AccountProps) {
+    super(props);
+
+    this.state = {};
+  }
+
+  private handleRegister = (
+    email: string,
+    password: string,
+    username: string,
+  ) => {
+    console.log(email, password, username);
+  }
+
+  private handleLogin = (email: string, password: string) => {
+    console.log(email, password);
+  }
+
+  render() {
+    const {
+      match: { path },
+    } = this.props;
+
+    return (
+      <Page>
+        <GreetingSection />
+        <AccountSection>
+          <AccountWrapper>
+            <Route
+              exact
+              path={`${path}/`}
+              render={() => (
+                <RegisterFormContainer
+                  onSubmit={this.handleRegister}
+                  loginPath={`${path}/login`}
+                />
+              )}
+            />
+            <Route
+              path={`${path}/login`}
+              render={() => (
+                <LoginFormContainer
+                  onSubmit={this.handleLogin}
+                  registerPath={`${path}/`}
+                />
+              )}
+            />
+          </AccountWrapper>
+        </AccountSection>
+      </Page>
+    );
+  }
+}
