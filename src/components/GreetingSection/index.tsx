@@ -7,17 +7,15 @@ import {
   GreetingWrapper,
 } from './style';
 
-const GreetingSection = () => {
-  return (
-    <Component>
-      <GreetingWrapper>
-        <GreetingContainer>
-          <GreetingHeading>Welcome to Cledor Admin</GreetingHeading>
-          <GreetingContent />
-        </GreetingContainer>
-      </GreetingWrapper>
-    </Component>
-  );
-};
+const GreetingSection: React.FC = () => (
+  <Component>
+    <GreetingWrapper>
+      <GreetingContainer>
+        <GreetingHeading>Welcome to Cledor Admin</GreetingHeading>
+        <GreetingContent />
+      </GreetingContainer>
+    </GreetingWrapper>
+  </Component>
+);
 
 export default GreetingSection;
