@@ -1,15 +1,24 @@
 import * as React from 'react';
-import { Route, RouteComponentProps } from 'react-router';
+import { Route, RouteComponentProps, Redirect } from 'react-router';
 import { Page, AccountSection, AccountWrapper } from './style';
 import {
   RegisterFormContainer,
   LoginFormContainer,
   GreetingSection,
 } from '../../components';
+import { registerUser } from '../../../apis/auth';
 
 export interface AccountProps extends RouteComponentProps {}
 
-export default class Account extends React.Component<AccountProps> {
+export interface AccountState {
+  registerErrorMessage?: string;
+  token?: string;
+}
+
+export default class Account extends React.Component<
+  AccountProps,
+  AccountState
+> {
   constructor(props: AccountProps) {
     super(props);
 
@@ -21,7 +30,22 @@ export default class Account extends React.Component<AccountProps> {
     password: string,
     username: string,
   ) => {
-    console.log(email, password, username);
+    registerUser({ email, password, username })
+      .then(token => {
+        sessionStorage.setItem('token', token);
+        this.setState({ token });
+      })
+      .catch(error => {
+        switch (error.response.status) {
+          case 409:
+            this.setState({
+              registerErrorMessage: '이미 가입이 완료된 이메일입니다.',
+            });
+            break;
+          default:
+            this.setState({ registerErrorMessage: '문제가 발생했습니다.' });
+        }
+      });
   }
 
   private handleLogin = (email: string, password: string) => {
@@ -32,6 +56,11 @@ export default class Account extends React.Component<AccountProps> {
     const {
       match: { path },
     } = this.props;
+    const { registerErrorMessage } = this.state;
+
+    if (sessionStorage.getItem('token')) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <Page>
@@ -45,6 +74,7 @@ export default class Account extends React.Component<AccountProps> {
                 <RegisterFormContainer
                   onSubmit={this.handleRegister}
                   loginPath={`${path}/login`}
+                  errorMessage={registerErrorMessage}
                 />
               )}
             />
