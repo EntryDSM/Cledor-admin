@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, StyledInput, ErrorLabel } from './style';
-import { InputType, inputTagType, validateEmail } from '../../../services';
+import { InputType, inputTagType, validateEmail } from '../../../utils';
 
 export interface TextInputProps {
   onChange: (text: string) => void;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, Username, Message, ChatedAt } from './style';
-import { formatDate } from '../../../services';
+import { formatDate } from '../../../utils';
 
 interface MessageThreadProps {
   isSelected?: boolean;
