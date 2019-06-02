@@ -6,12 +6,13 @@ import {
   LoginFormContainer,
   GreetingSection,
 } from '../../components';
-import { registerUser } from '../../../apis/auth';
+import { registerUser, loginUser } from '../../../apis/auth';
 
 export interface AccountProps extends RouteComponentProps {}
 
 export interface AccountState {
   registerErrorMessage?: string;
+  loginErrorMessage?: string;
   token?: string;
 }
 
@@ -49,14 +50,29 @@ export default class Account extends React.Component<
   }
 
   private handleLogin = (email: string, password: string) => {
-    console.log(email, password);
+    loginUser({ email, password })
+      .then(token => {
+        sessionStorage.setItem('token', token);
+        this.setState({ token });
+      })
+      .catch(error => {
+        switch (error.response.status) {
+          case 401:
+            this.setState({
+              loginErrorMessage: '이메일 또는 비밀번호가 잘못되었습니다.',
+            });
+            break;
+          default:
+            this.setState({ loginErrorMessage: '문제가 발생했습니다.' });
+        }
+      });
   }
 
   render() {
     const {
       match: { path },
     } = this.props;
-    const { registerErrorMessage } = this.state;
+    const { registerErrorMessage, loginErrorMessage } = this.state;
 
     if (sessionStorage.getItem('token')) {
       return <Redirect to="/" />;
@@ -84,6 +100,7 @@ export default class Account extends React.Component<
                 <LoginFormContainer
                   onSubmit={this.handleLogin}
                   registerPath={`${path}/`}
+                  errorMessage={loginErrorMessage}
                 />
               )}
             />
