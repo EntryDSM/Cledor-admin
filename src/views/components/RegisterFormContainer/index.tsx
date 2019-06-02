@@ -6,16 +6,18 @@ import {
   TextInput,
   AccountHeading,
   ToggleLink,
+  ErrorLabel,
 } from '..';
 
 interface RegisterFormContainerProps {
   onSubmit: (email: string, password: string, username: string) => void;
   loginPath: string;
+  errorMessage?: string;
 }
 
 const RegisterFormContainer: React.FunctionComponent<
   RegisterFormContainerProps
-> = ({ onSubmit, loginPath }) => {
+> = ({ onSubmit, loginPath, errorMessage }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -29,6 +31,7 @@ const RegisterFormContainer: React.FunctionComponent<
         }}
       >
         <AccountHeading>계정생성</AccountHeading>
+        <ErrorLabel>{errorMessage}</ErrorLabel>
         <TextInput
           onChange={setEmail}
           value={email}

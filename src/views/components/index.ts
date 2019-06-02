@@ -11,6 +11,7 @@ import AccountForm from './AccountForm';
 import ToggleLink from './ToggleLink';
 import LoginFormContainer from './LoginFormContainer';
 import GreetingSection from './GreetingSection';
+import ErrorLabel from './ErrorLabel';
 
 export {
   AccountHeading,
@@ -26,4 +27,5 @@ export {
   ToggleLink,
   LoginFormContainer,
   GreetingSection,
+  ErrorLabel,
 };

@@ -6,16 +6,19 @@ import {
   TextInput,
   AccountHeading,
   ToggleLink,
+  ErrorLabel,
 } from '..';
 
 interface LoginFormContainerProps {
   onSubmit: (email: string, password: string) => void;
   registerPath: string;
+  errorMessage?: string;
 }
 
 const LoginFormContainer: React.FunctionComponent<LoginFormContainerProps> = ({
   onSubmit,
   registerPath,
+  errorMessage,
 }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -28,6 +31,7 @@ const LoginFormContainer: React.FunctionComponent<LoginFormContainerProps> = ({
           onSubmit(email, password);
         }}
       >
+        <ErrorLabel>{errorMessage}</ErrorLabel>
         <AccountHeading>로그인</AccountHeading>
         <TextInput
           onChange={setEmail}
