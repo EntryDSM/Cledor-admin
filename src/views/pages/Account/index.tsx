@@ -7,13 +7,16 @@ import {
   GreetingSection,
 } from '../../components';
 import { registerUser, loginUser } from '../../../apis/auth';
+import { User } from '../../../entities/user';
 
-export interface AccountProps extends RouteComponentProps {}
+export interface AccountProps extends RouteComponentProps {
+  token?: string;
+  setAuthData: (token: string, user: User) => void;
+}
 
 export interface AccountState {
   registerErrorMessage?: string;
   loginErrorMessage?: string;
-  token?: string;
 }
 
 export default class Account extends React.Component<
@@ -32,9 +35,10 @@ export default class Account extends React.Component<
     username: string,
   ) => {
     registerUser({ email, password, username })
-      .then(token => {
-        sessionStorage.setItem('token', token);
-        this.setState({ token });
+      .then(({ token, user }) => {
+        const { setAuthData } = this.props;
+
+        setAuthData(token, user);
       })
       .catch(error => {
         switch (error.response.status) {
@@ -51,9 +55,10 @@ export default class Account extends React.Component<
 
   private handleLogin = (email: string, password: string) => {
     loginUser({ email, password })
-      .then(token => {
-        sessionStorage.setItem('token', token);
-        this.setState({ token });
+      .then(({ token, user }) => {
+        const { setAuthData } = this.props;
+
+        setAuthData(token, user);
       })
       .catch(error => {
         switch (error.response.status) {
@@ -71,10 +76,11 @@ export default class Account extends React.Component<
   render() {
     const {
       match: { path },
+      token,
     } = this.props;
     const { registerErrorMessage, loginErrorMessage } = this.state;
 
-    if (sessionStorage.getItem('token')) {
+    if (token) {
       return <Redirect to="/" />;
     }
 
