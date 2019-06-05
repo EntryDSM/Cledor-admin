@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, Username, Message, ChatedAt } from './style';
-import { formatDate } from '../../../utils';
+import { formatMillisecondFull } from '../../../utils';
 
 interface MessageThreadProps {
   isSelected?: boolean;
@@ -19,7 +19,7 @@ const MessageThread: React.FunctionComponent<MessageThreadProps> = ({
     <Component isSelected={isSelected}>
       <Username>{username}</Username>
       <Message>{message}</Message>
-      <ChatedAt>{formatDate(chatedAt)}</ChatedAt>
+      <ChatedAt>{formatMillisecondFull(chatedAt)}</ChatedAt>
     </Component>
   );
 };

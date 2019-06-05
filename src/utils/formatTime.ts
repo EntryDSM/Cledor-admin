@@ -1,7 +1,7 @@
 import { padNumberByZero } from './padNumberByZero';
 
-export const formatDate = (millisecond: number): string => {
-  const dateObject = new Date(millisecond);
+export const formatMillisecondFull = (time: number): string => {
+  const dateObject = new Date(time);
   const year = padNumberByZero(dateObject.getFullYear(), 2);
   const month = padNumberByZero(dateObject.getMonth() + 1, 2);
   const date = padNumberByZero(dateObject.getDate(), 2);
