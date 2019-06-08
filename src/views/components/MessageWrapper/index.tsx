@@ -7,24 +7,27 @@ import {
   StyledImage,
   MessageBubble,
 } from './style';
+import { formatMillisecondFull } from '../../../utils/';
 
 interface MessageWrapperProps {
   content?: string;
-  formatedSendedAt: string;
-  isAuthorMe: boolean;
+  sendedAt: number;
+  isAdmin: boolean;
   encodedImageData?: string;
 }
 
 const MessageWrapper: React.FunctionComponent<MessageWrapperProps> = ({
   content,
-  formatedSendedAt,
-  isAuthorMe,
+  sendedAt,
+  isAdmin,
   encodedImageData,
 }) => {
+  const formattedTime = formatMillisecondFull(sendedAt);
+
   const imageMessage = encodedImageData ? (
     <MessageCover>
       <StyledImage src={encodedImageData} />
-      <MessageTime>{formatedSendedAt}</MessageTime>
+      <MessageTime>{formattedTime}</MessageTime>
     </MessageCover>
   ) : (
     ''
@@ -37,14 +40,14 @@ const MessageWrapper: React.FunctionComponent<MessageWrapperProps> = ({
           <TextLine key={index}>{line}</TextLine>
         ))}
       </MessageBubble>
-      <MessageTime>{formatedSendedAt}</MessageTime>
+      <MessageTime>{formattedTime}</MessageTime>
     </MessageCover>
   ) : (
     ''
   );
 
   return (
-    <Component authorMe={isAuthorMe}>
+    <Component authorMe={isAdmin}>
       {imageMessage}
       {textMessage}
     </Component>
