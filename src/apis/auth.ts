@@ -21,3 +21,10 @@ export const loginUser = async (
   );
   return response.data;
 };
+
+export const getUserData = async (token: string): Promise<User> => {
+  const response = await axios.get<User>(`${BASE_URL}/user`, {
+    headers: { Authorization: token },
+  });
+  return response.data;
+};
