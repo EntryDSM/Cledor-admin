@@ -3,20 +3,20 @@ import { Component, Username, Message, ChatedAt } from './style';
 import { formatMillisecondFull } from '../../../utils';
 
 interface MessageThreadProps {
-  isSelected?: boolean;
+  linkPath: string;
   username: string;
-  message: string;
+  message?: string;
   chatedAt: number;
 }
 
 const MessageThread: React.FunctionComponent<MessageThreadProps> = ({
-  isSelected = false,
+  linkPath,
   username,
   message,
   chatedAt,
 }) => {
   return (
-    <Component isSelected={isSelected}>
+    <Component to={linkPath}>
       <Username>{username}</Username>
       <Message>{message}</Message>
       <ChatedAt>{formatMillisecondFull(chatedAt)}</ChatedAt>

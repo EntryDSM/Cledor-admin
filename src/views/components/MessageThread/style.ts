@@ -1,28 +1,27 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-interface ComponentProps {
-  isSelected: boolean;
-}
-
-export const Component = styled.div`
+export const Component = styled(NavLink)`
+  display: block;
+  width: 100%;
   padding: 20px;
   position: relative;
   font-size: 16px;
   cursor: pointer;
   background-color: #fff;
+  color: #000;
+  text-decoration: none;
 
   &:hover {
     background-color: #eee;
   }
 
-  ${({ isSelected }: ComponentProps) =>
-    isSelected &&
-    css`
+  &.active {
+    background-color: #ddd;
+    &:hover {
       background-color: #ddd;
-      &:hover {
-        background-color: #ddd;
-      }
-    `}
+    }
+  }
 `;
 
 export const Username = styled.div`

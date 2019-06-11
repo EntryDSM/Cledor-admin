@@ -2,7 +2,7 @@ import AccountHeading from './AccountHeading';
 import TextInput from './TextInput';
 import Button from './Button';
 import HeaderNavigationBar from './HeaderNavigationBar';
-import MessageThreadContainer from './MessageThreadContainer';
+import MessageThread from './MessageThread';
 import MessageWrapper from './MessageWrapper';
 import MessengerChatBar from './MessengerChatBar';
 import AccountFormContainer from './AccountFormContainer';
@@ -19,7 +19,7 @@ export {
   TextInput,
   Button,
   HeaderNavigationBar,
-  MessageThreadContainer,
+  MessageThread,
   MessageWrapper,
   MessengerChatBar,
   AccountFormContainer,
