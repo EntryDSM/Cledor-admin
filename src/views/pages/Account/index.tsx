@@ -81,7 +81,7 @@ export default class Account extends React.Component<
     const { registerErrorMessage, loginErrorMessage } = this.state;
 
     if (token) {
-      return <Redirect to="/" />;
+      return <Redirect to="/rooms" />;
     }
 
     return (
