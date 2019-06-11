@@ -13,6 +13,7 @@ import LoginFormContainer from './LoginFormContainer';
 import GreetingSection from './GreetingSection';
 import ErrorLabel from './ErrorLabel';
 import MessengerArea from './MessengerArea';
+import MessageThreadList from './MessageThreadList';
 
 export {
   AccountHeading,
@@ -30,4 +31,5 @@ export {
   GreetingSection,
   ErrorLabel,
   MessengerArea,
+  MessageThreadList,
 };
