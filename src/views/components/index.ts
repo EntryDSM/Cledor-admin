@@ -12,6 +12,7 @@ import ToggleLink from './ToggleLink';
 import LoginFormContainer from './LoginFormContainer';
 import GreetingSection from './GreetingSection';
 import ErrorLabel from './ErrorLabel';
+import MessengerArea from './MessengerArea';
 
 export {
   AccountHeading,
@@ -28,4 +29,5 @@ export {
   LoginFormContainer,
   GreetingSection,
   ErrorLabel,
+  MessengerArea,
 };
