@@ -24,7 +24,7 @@ export const Component = styled(NavLink)`
   }
 `;
 
-export const Username = styled.div`
+export const RoomName = styled.div`
   margin-bottom: 5px;
 `;
 

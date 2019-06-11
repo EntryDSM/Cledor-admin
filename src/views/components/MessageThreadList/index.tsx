@@ -49,12 +49,12 @@ export default class MessageThreadList extends React.Component<
     const { messageThreads, basePath } = this.props;
 
     const wrappedMessageThreads = messageThreads.map(
-      ({ room, latestMessage: { content, writer, sendedAt } }) => (
+      ({ room, latestMessage: { content, sendedAt } }) => (
         <MessageThread
           key={room}
           linkPath={`${basePath}/${room}`}
           message={content}
-          username={writer}
+          roomName={room}
           chatedAt={sendedAt}
         />
       ),
