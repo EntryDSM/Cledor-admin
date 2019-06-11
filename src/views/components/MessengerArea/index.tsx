@@ -4,6 +4,7 @@ import MessengerChatBar from '../../components/MessengerChatBar';
 import MessageWrapper from '../../components/MessageWrapper';
 import * as S from './style';
 import { Message } from '../../../entities/message';
+import { toEmail } from '../../../utils/convertEmailAndUrl';
 
 interface MessengerAreaProps extends RouteComponentProps<{ room: string }> {
   rooms: {
@@ -22,7 +23,14 @@ interface MessengerAreaProps extends RouteComponentProps<{ room: string }> {
   isBottomOfBoard: boolean;
 }
 
-export default class MessengerArea extends React.Component<MessengerAreaProps> {
+interface MessengerAreaState {
+  emailizedRoom: string;
+}
+
+export default class MessengerArea extends React.Component<
+  MessengerAreaProps,
+  MessengerAreaState
+> {
   private scrollableBoard = React.createRef<HTMLDivElement>();
   private bottomOfBoard = React.createRef<HTMLDivElement>();
 
@@ -36,7 +44,12 @@ export default class MessengerArea extends React.Component<MessengerAreaProps> {
       },
     } = props;
 
-    requestPreviousMessages({ room, limit: 20 });
+    const emailizedRoom = toEmail(room);
+    this.state = {
+      emailizedRoom,
+    };
+
+    requestPreviousMessages({ room: emailizedRoom, limit: 20 });
   }
 
   componentDidMount() {
@@ -91,9 +104,12 @@ export default class MessengerArea extends React.Component<MessengerAreaProps> {
     }
 
     if (prevRoom !== room) {
-      if (!rooms[room]) {
+      const emailizedRoom = toEmail(room);
+      this.setState({ emailizedRoom });
+
+      if (!rooms[emailizedRoom]) {
         const { requestPreviousMessages } = this.props;
-        requestPreviousMessages({ room, limit: 20 });
+        requestPreviousMessages({ room: emailizedRoom, limit: 20 });
       } else {
         this.scrollToBottomOfBoard();
       }
@@ -101,14 +117,10 @@ export default class MessengerArea extends React.Component<MessengerAreaProps> {
   }
 
   private handleSend = (content: string, imageData?: File) => {
-    const {
-      match: {
-        params: { room },
-      },
-      onSend,
-    } = this.props;
+    const { onSend } = this.props;
+    const { emailizedRoom } = this.state;
 
-    onSend({ content, imageData, room });
+    onSend({ content, imageData, room: emailizedRoom });
   }
 
   private scrollToBottomOfBoard = () => {
@@ -119,16 +131,13 @@ export default class MessengerArea extends React.Component<MessengerAreaProps> {
   }
 
   render() {
-    const {
-      match: {
-        params: { room },
-      },
-      rooms,
-    } = this.props;
+    const { rooms } = this.props;
+
+    const { emailizedRoom } = this.state;
 
     const wrappedMessages =
-      rooms[room] &&
-      rooms[room].map(
+      rooms[emailizedRoom] &&
+      rooms[emailizedRoom].map(
         ({ content, encodedImageData, isAdmin, _id, sendedAt }) => {
           return (
             <MessageWrapper

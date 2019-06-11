@@ -2,6 +2,7 @@ import * as React from 'react';
 import { MessageThread as Entity } from '../../../entities/messageThread';
 import { MessageThread } from '..';
 import * as S from './style';
+import { toUrl } from '../../../utils/convertEmailAndUrl';
 
 interface MessageThreadListProps {
   messageThreads: Entity[];
@@ -52,7 +53,7 @@ export default class MessageThreadList extends React.Component<
       ({ room, latestMessage: { content, sendedAt } }) => (
         <MessageThread
           key={room}
-          linkPath={`${basePath}/${room}`}
+          linkPath={`${basePath}/${toUrl(room)}`}
           message={content}
           roomName={room}
           chatedAt={sendedAt}
