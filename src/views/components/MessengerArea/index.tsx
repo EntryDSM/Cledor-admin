@@ -5,6 +5,7 @@ import MessageWrapper from '../../components/MessageWrapper';
 import * as S from './style';
 import { Message } from '../../../entities/message';
 import { toEmail } from '../../../utils/convertEmailAndUrl';
+import { LightBox } from '..';
 
 interface MessengerAreaProps extends RouteComponentProps<{ room: string }> {
   rooms: {
@@ -25,6 +26,7 @@ interface MessengerAreaProps extends RouteComponentProps<{ room: string }> {
 
 interface MessengerAreaState {
   emailizedRoom: string;
+  imageSrc?: string;
 }
 
 export default class MessengerArea extends React.Component<
@@ -123,6 +125,14 @@ export default class MessengerArea extends React.Component<
     onSend({ content, imageData, room: emailizedRoom });
   }
 
+  private handleClickImage = (imageSrc: string) => {
+    this.setState({ imageSrc });
+  }
+
+  private closeLightBox = () => {
+    this.setState({ imageSrc: undefined });
+  }
+
   private scrollToBottomOfBoard = () => {
     const { current } = this.bottomOfBoard;
     if (current) {
@@ -133,7 +143,7 @@ export default class MessengerArea extends React.Component<
   render() {
     const { rooms } = this.props;
 
-    const { emailizedRoom } = this.state;
+    const { emailizedRoom, imageSrc } = this.state;
 
     const wrappedMessages =
       rooms[emailizedRoom] &&
@@ -146,6 +156,7 @@ export default class MessengerArea extends React.Component<
               isAdmin={isAdmin}
               encodedImageData={encodedImageData}
               content={content}
+              onClickImage={this.handleClickImage}
             />
           );
         },
@@ -154,6 +165,9 @@ export default class MessengerArea extends React.Component<
     return (
       <S.MessengerArea>
         <S.MessageBoard ref={this.scrollableBoard}>
+          {imageSrc && (
+            <LightBox imageSrc={imageSrc} onClose={this.closeLightBox} />
+          )}
           {wrappedMessages}
           <S.BottomOfBoard ref={this.bottomOfBoard} />
         </S.MessageBoard>

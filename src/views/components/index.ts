@@ -14,6 +14,7 @@ import GreetingSection from './GreetingSection';
 import ErrorLabel from './ErrorLabel';
 import MessengerArea from './MessengerArea';
 import MessageThreadList from './MessageThreadList';
+import LightBox from './LightBox';
 
 export {
   AccountHeading,
@@ -32,4 +33,5 @@ export {
   ErrorLabel,
   MessengerArea,
   MessageThreadList,
+  LightBox,
 };

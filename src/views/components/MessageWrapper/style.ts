@@ -9,6 +9,7 @@ export const MessageCover = styled.div`
 
 export const StyledImage = styled.img`
   max-width: 250px;
+  cursor: pointer;
 `;
 
 export const MessageBubble = styled.div`

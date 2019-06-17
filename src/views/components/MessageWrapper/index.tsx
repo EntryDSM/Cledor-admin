@@ -14,6 +14,7 @@ interface MessageWrapperProps {
   sendedAt: number;
   isAdmin: boolean;
   encodedImageData?: string;
+  onClickImage: (imageSrc: string) => void;
 }
 
 const MessageWrapper: React.FunctionComponent<MessageWrapperProps> = ({
@@ -21,12 +22,16 @@ const MessageWrapper: React.FunctionComponent<MessageWrapperProps> = ({
   sendedAt,
   isAdmin,
   encodedImageData,
+  onClickImage,
 }) => {
   const formattedTime = formatMillisecondFull(sendedAt);
 
   const imageMessage = encodedImageData ? (
     <MessageCover>
-      <StyledImage src={encodedImageData} />
+      <StyledImage
+        src={encodedImageData}
+        onClick={onClickImage.bind(undefined, encodedImageData)}
+      />
       <MessageTime>{formattedTime}</MessageTime>
     </MessageCover>
   ) : (
