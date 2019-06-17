@@ -144,6 +144,16 @@ export default class Messages extends React.Component<
     this.appendPreviousMessageThreads(messageThreads);
   }
 
+  handleSend = (message: {
+    content: string;
+    imageData?: File;
+    room: string;
+  }) => {
+    const { chatSocketContainer } = this.state;
+
+    chatSocketContainer.sendMessage(message);
+  }
+
   render() {
     const {
       match: { path },
@@ -154,7 +164,6 @@ export default class Messages extends React.Component<
       onlineAdminCount,
       messageThreads,
       isBottomOfMessageBoard,
-      chatSocketContainer,
     } = this.state;
 
     return (
@@ -176,7 +185,7 @@ export default class Messages extends React.Component<
               <MessengerArea
                 {...props}
                 rooms={rooms}
-                onSend={chatSocketContainer.sendMessage}
+                onSend={this.handleSend}
                 requestPreviousMessages={this.requestPreviousMessages}
                 isBottomOfBoard={isBottomOfMessageBoard}
               />
