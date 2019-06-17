@@ -42,8 +42,32 @@ export default class Messages extends React.Component<
       chatSocketContainer: new ChatSocketContainer(
         props.token,
         props.user.email,
-        this.appendMessage,
-        this.changeOnlineAdminCount,
+        (message: Message) => {
+          this.setState(prevState => {
+            const messagesAtCurrentRoom = prevState.rooms[message.room]
+              ? [...prevState.rooms[message.room], message]
+              : [message];
+
+            const messageThreads = [
+              { room: message.room, latestMessage: message },
+              ...prevState.messageThreads.filter(
+                ({ room }) => room !== message.room,
+              ),
+            ];
+
+            return {
+              messageThreads,
+              rooms: {
+                ...prevState.rooms,
+                [message.room]: messagesAtCurrentRoom,
+              },
+              isBottomOfMessageBoard: true,
+            };
+          });
+        },
+        (onlineAdminCount: number) => {
+          this.setState({ onlineAdminCount });
+        },
       ),
       rooms: {},
       messageThreads: [],
@@ -55,38 +79,6 @@ export default class Messages extends React.Component<
   componentWillUnmount() {
     const { chatSocketContainer } = this.state;
     chatSocketContainer.disconnect();
-  }
-
-  handleSend = (message: {
-    content: string;
-    imageData?: File;
-    room: string;
-  }) => {
-    const { chatSocketContainer } = this.state;
-
-    chatSocketContainer.sendMessage(message);
-  }
-
-  appendMessage = (message: Message) => {
-    this.setState(prevState => {
-      const messagesAtCurrentRoom = prevState.rooms[message.room]
-        ? [...prevState.rooms[message.room], message]
-        : [message];
-
-      const messageThreads = [
-        { room: message.room, latestMessage: message },
-        ...prevState.messageThreads.filter(({ room }) => room !== message.room),
-      ];
-
-      return {
-        messageThreads,
-        rooms: {
-          ...prevState.rooms,
-          [message.room]: messagesAtCurrentRoom,
-        },
-        isBottomOfMessageBoard: true,
-      };
-    });
   }
 
   appendPreviousMessages = (room: string, messages: Message[]) => {
@@ -152,10 +144,6 @@ export default class Messages extends React.Component<
     this.appendPreviousMessageThreads(messageThreads);
   }
 
-  changeOnlineAdminCount = (onlineAdminCount: number) => {
-    this.setState({ onlineAdminCount });
-  }
-
   render() {
     const {
       match: { path },
@@ -166,6 +154,7 @@ export default class Messages extends React.Component<
       onlineAdminCount,
       messageThreads,
       isBottomOfMessageBoard,
+      chatSocketContainer,
     } = this.state;
 
     return (
@@ -187,7 +176,7 @@ export default class Messages extends React.Component<
               <MessengerArea
                 {...props}
                 rooms={rooms}
-                onSend={this.handleSend}
+                onSend={chatSocketContainer.sendMessage}
                 requestPreviousMessages={this.requestPreviousMessages}
                 isBottomOfBoard={isBottomOfMessageBoard}
               />
